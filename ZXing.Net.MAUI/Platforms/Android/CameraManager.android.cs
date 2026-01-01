@@ -170,6 +170,8 @@ namespace ZXing.Net.Maui
                     // if not, this should be sufficient as a fallback
                     _camera = _cameraProvider.BindToLifecycle(maLifecycleOwner, _cameraSelector, _cameraPreview, _imageAnalyzer);
                 }
+
+                ApplyZoomFactor();
             }
         }
 
@@ -221,6 +223,11 @@ namespace ZXing.Net.Maui
         public void UpdateTorch(bool on)
         {
             _camera?.CameraControl?.EnableTorch(on);
+        }
+
+        partial void ApplyZoomFactor()
+        {
+            _camera?.CameraControl?.SetLinearZoom(ZoomFactor);
         }
 
         public void Focus(Point point)

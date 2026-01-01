@@ -22,6 +22,7 @@ namespace ZXing.Net.Maui
 
 		public CameraLocation CameraLocation { get; private set; }
 		public CameraInfo SelectedCamera { get; private set; }
+		public float ZoomFactor { get; private set; }
 
 		/// <summary>
 		/// Gets a value indicating whether barcode scanning is supported on this device.
@@ -48,7 +49,15 @@ namespace ZXing.Net.Maui
 			UpdateCamera();
 		}
 
+		public void UpdateZoomFactor(float zoomFactor)
+		{
+			ZoomFactor = Math.Clamp(zoomFactor, 0f, 1f);
+			ApplyZoomFactor();
+		}
+
 		public static async Task<bool> CheckPermissions()
 			=> (await Permissions.RequestAsync<Permissions.Camera>()) == PermissionStatus.Granted;
+
+		partial void ApplyZoomFactor();
 	}
 }

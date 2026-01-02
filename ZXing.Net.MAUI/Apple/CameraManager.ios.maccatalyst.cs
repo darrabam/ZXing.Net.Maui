@@ -200,7 +200,6 @@ namespace ZXing.Net.Maui
 
 				captureSession.StartRunning();
 
-				ApplyZoomFactor();
 			}
 		}
 

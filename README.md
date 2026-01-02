@@ -108,6 +108,18 @@ Toggle Torch
 cameraBarcodeReaderView.IsTorchOn = !cameraBarcodeReaderView.IsTorchOn;
 ```
 
+Set zoom (normalized 0..1)
+```csharp
+// 0 = minimum, 1 = maximum (values outside the range are clamped)
+cameraBarcodeReaderView.ZoomFactor = 0.5f;
+```
+
+Notes on zoom behavior:
+- The zoom factor is normalized (0..1) across platforms.
+- iOS maps 0..1 to the device zoom range [1, max], where max is capped to the maximum optical zoom (currently min of `ActiveFormat.VideoMaxZoomFactor` and `5x`) to avoid degraded digital zoom.
+- Android uses linear zoom via CameraX.
+- Windows maps the normalized value to the device `ZoomControl` range when supported.
+
 Flip between Rear/Front cameras
 ```csharp
 cameraBarcodeReaderView.CameraLocation
@@ -172,7 +184,6 @@ The `BarcodeGeneratorView` supports UTF-8 character encoding by default, which a
 ```
 
 The `CharacterSet` property defaults to "UTF-8" if not specified. Other common values include "ISO-8859-1", "Shift_JIS", etc., depending on your barcode format requirements.
-
 
 
 

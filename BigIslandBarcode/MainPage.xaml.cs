@@ -80,5 +80,12 @@ namespace BigIslandBarcode
 		{
 			barcodeView.IsTorchOn = !barcodeView.IsTorchOn;
 		}
-	}
+
+        private void ZoomFactorChanged(object sender, ValueChangedEventArgs e)
+        {
+            var slider = (Slider)sender;
+            barcodeView.ZoomFactor = (float)e.NewValue;
+
+        }
+    }
 }
